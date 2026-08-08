@@ -1,0 +1,21 @@
+{
+  "name": "Dux4J",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "user": "ubuntu",
+  "install": "./scripts/cloud-agent-install.sh",
+  "terminals": [
+    {
+      "name": "bookstore-api",
+      "command": "cd spring-boot-starter && mvn spring-boot:run -q"
+    }
+  ],
+  "ports": [
+    {
+      "name": "bookstore-api",
+      "port": 8080
+    }
+  ]
+}
