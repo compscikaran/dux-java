@@ -34,7 +34,7 @@ The v3 API uses reflection to auto-discover reducers from a given package, elimi
 import org.flux.store.api.v1.State;
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @ToString
+@Data
 public class UserProfile implements State {
     private String name;
     private String email;
@@ -56,7 +56,7 @@ import org.flux.store.api.v1.Action;
 import org.flux.store.api.v3.AutoStore;
 import org.flux.store.api.v3.ReducerBlock;
 
-@AutoStore("MyStore")
+@AutoStore
 public class SetNameReducer implements ReducerBlock<UserProfile> {
     @Override
     public String getType() { return "setName"; }
@@ -70,7 +70,7 @@ public class SetNameReducer implements ReducerBlock<UserProfile> {
 ```
 
 ```java
-@AutoStore("MyStore")
+@AutoStore
 public class SetEmailReducer implements ReducerBlock<UserProfile> {
     @Override
     public String getType() { return "setEmail"; }
@@ -91,7 +91,6 @@ import org.flux.store.main.v3.ReflectionDuxSliceBuilder;
 
 Slice<UserProfile> slice = new ReflectionDuxSliceBuilder<UserProfile>()
         .setInitialState(new UserProfile("Karan Gupta", "karan@hello.com"))
-        .setStoreName("MyStore")
         .setBasePackage("com.example.app.reducers")
         .build();
 
